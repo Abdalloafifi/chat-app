@@ -1,0 +1,61 @@
+.all-chat-page {
+    margin-top: 20px;
+    height: calc(100vh - 100px); /* ارتفاع مناسب للشاشة */
+}
+
+.chat-page {
+    display: flex;
+    flex-direction: column; /* ترتيب عمودي للجوال */
+    height: 100%;
+}
+.all-chat-page {
+    margin-top: 20px;
+    height: calc(100vh - 100px); /* ارتفاع كامل مع تعديل للهيدر */
+    overflow: hidden; /* منع التجاوز الخارجي */
+}
+
+.chat-page {
+    display: flex;
+    height: 100%; /* ملء الارتفاع المتبقي */
+}
+
+.chat-clines {
+    flex: 1;
+    max-width: 350px;
+    min-width: 250px; /* عرض أدنى للشريط الجانبي */
+    overflow-y: auto; /* التمرير داخل الشريط فقط */
+}
+
+.chat-containers {
+    flex: 3;
+    height: 100%; /* ملء الارتفاع */
+    margin: 0 5px;
+    border-radius: 15px;
+    overflow: hidden; /* منع تجاوز المحتوى */
+}
+
+@media (min-width: 768px) {
+    .chat-page {
+        flex-direction: row; /* ترتيب أفقي للشاشات الكبيرة */
+    }
+}
+
+.chat-clines {
+    flex: 1;
+    max-width: 100%; /* منع التجاوز */
+    /* margin-bottom: 15px; تباعد للجوال */
+}
+
+@media (min-width: 768px) {
+    .chat-clines {
+        margin-bottom: 0;
+        max-width: 350px; /* عرض ثابت للشريط الجانبي */
+    }
+}
+
+.chat-containers {
+    flex: 3;
+    /* min-height: 500px; ارتفاع أدنى */
+    margin: 0 5px;
+    border-radius: 15px;
+}
