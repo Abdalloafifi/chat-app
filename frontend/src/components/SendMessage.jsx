@@ -53,7 +53,7 @@ const SendMessagePage = () => {
     }
 
     try {
-      await dispatch(sendMessage({ receiverId: id, formData }));
+      dispatch(sendMessage({ receiverId: id, formData }));
       setMessage("");
       setFile(null);
       setAudioBlob(null);
