@@ -31,7 +31,8 @@ export function sendMessage({ receiverId, formData }) {
         const res = await server.post(`/messager/sendmessage/${receiverId}`, formData);
         return res.data;
       } catch (error) {
-      toast.error(error.response?.data?.error || "فشل الإرسال");
+          toast.error(error.response?.data?.error || "فشل الإرسال");
+        console.error("Error sending message:", error);
       throw error;
     }
   };

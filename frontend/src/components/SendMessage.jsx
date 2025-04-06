@@ -47,10 +47,9 @@ const SendMessagePage = () => {
 
     const formData = new FormData();
     formData.append("text", message);
-    formData.append("receiverId", id);
     if (file) formData.append("file", file);
     if (audioBlob) {
-      formData.append("audio", new File([audioBlob], "audio-message.wav", { type: "audio/wav" }));
+      formData.append("file", new File([audioBlob], "audio-message.wav", { type: "audio/wav" }));
     }
 
     try {
@@ -59,7 +58,7 @@ const SendMessagePage = () => {
       setFile(null);
       setAudioBlob(null);
     } catch (error) {
-      // يتم التعامل مع الخطأ في messageapi
+      console.error("فشل إرسال الرسالة:", error);
     }
   };
 

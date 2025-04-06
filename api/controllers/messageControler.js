@@ -4,7 +4,8 @@ const asyncHandler = require("express-async-handler");
 const xss = require("xss");
 const cloudinary = require("../config/cloudinary");
 const mongoose = require("mongoose");
-const { getReceiverSocketId, getIO } = require("../socket");
+const { promisify } = require("util");
+const { getReceiverSocketId, getIO } = require("../socket"); // استيراد io والدالة الخاصة بالـ socket
 
 if (!process.env.JWT_SECRET) {
   throw new Error("JWT_SECRET غير موجود في المتغيرات البيئية");
@@ -45,7 +46,7 @@ exports.getMessages = asyncHandler(async (req, res) => {
   if (messages.length === 0) {
     return res.status(404).json({ message: "لا يوجد رسائل" });
   }
-
+console.log(messages.length);
   res.status(200).json(messages);
 });
 

@@ -13,7 +13,7 @@ export const socket = io('http://localhost:3000', {
   transports: ["websocket", "polling"],
   reconnection: true,
   reconnectionAttempts: 5,
-  reconnectionDelay: 1000,
+  reconnectionDelay: 3000,
 });
 
 export const getIO = () => socket;
