@@ -6,7 +6,8 @@ import moment from 'moment';
 import HeaderMessage from "./Heder-message";
 import SendMessagePage from "./SendMessage";
 import "./ChatMessage.css";
-
+import { socket } from '../socket';
+import { massActions } from '../pages/redux/slices/messageslice'; // تأكد من المسار الصحيح
 const ChatMessage = () => {
   const location = useLocation();
   const { id } = useParams();
@@ -15,6 +16,15 @@ const ChatMessage = () => {
 
   const messages = useSelector((state) => state.message.getMessages);
   const { userInfo } = useSelector((state) => state.auth);
+  useEffect(() => {
+    socket.on("newMessage", (newMessage) => {
+      dispatch(massActions.addNewMessage(newMessage)); // استخدام إجراء الـ Slice
+    });
+  
+    return () => {
+      socket.off("newMessage");
+    };
+  }, [dispatch]);
 
   useEffect(() => {
     if (id) {

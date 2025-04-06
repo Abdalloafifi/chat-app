@@ -4,8 +4,7 @@ const asyncHandler = require("express-async-handler");
 const xss = require("xss");
 const cloudinary = require("../config/cloudinary");
 const mongoose = require("mongoose");
-const { promisify } = require("util");
-const { getReceiverSocketId, io } = require("../socket"); // استيراد io والدالة الخاصة بالـ socket
+const { getReceiverSocketId, getIO } = require("../socket");
 
 if (!process.env.JWT_SECRET) {
   throw new Error("JWT_SECRET غير موجود في المتغيرات البيئية");
@@ -115,18 +114,23 @@ exports.sendMessage = asyncHandler(async (req, res) => {
     .populate("receiverId", "username avatar");
 
   // إرسال رسالة عبر socket للمستلم إذا كان متصلاً
-  const receiverSocketId = getReceiverSocketId(id);
-  if (receiverSocketId) {
-    io.to(receiverSocketId).emit("newMessage", populatedMessage);
-  }
-  // يمكن أيضاً إرسال الحدث للمرسل (للتحديث اللحظي)
-  const senderSocketId = getReceiverSocketId(req.user._id.toString());
-  if (senderSocketId) {
-    io.to(senderSocketId).emit("newMessage", populatedMessage);
-  }
+  console.log("test5");
+  // إرسال رسالة عبر socket للمستلم إذا كان متصلاً
+const receiverSocketId = getReceiverSocketId(receiver._id.toString());
+if (receiverSocketId) {
+  const io = getIO(); // التأكد من إن io مُهيأ
+  io.to(receiverSocketId).emit("newMessage", populatedMessage);
+}
+
+// إرسال الحدث للمرسل (للتحديث اللحظي)
+const senderSocketId = getReceiverSocketId(req.user._id.toString());
+if (senderSocketId) {
+  const io = getIO();
+  io.to(senderSocketId).emit("newMessage", populatedMessage);
+}
+  console.log("test6");
 
   res.status(201).json(populatedMessage);
-  console.log("test4");
 });
 
 /**

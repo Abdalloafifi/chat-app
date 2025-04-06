@@ -76,7 +76,36 @@ export default function ProfilePage() {
   };
 
   if (!profile) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loader-overlay">
+        <div className="galaxy-loader">
+          {/* Cosmic Spinner */}
+          <div className="quantum-spinner">
+            <div className="orbit"></div>
+            <div className="orbit"></div>
+            <div className="orbit"></div>
+            <div className="pulsar-core"></div>
+          </div>
+  
+          {/* Animated Arabic Text */}
+          <div className="loader-text-container">
+            <h1 className="neon-arabic-text">
+              <span>ج</span>
+              <span>َ</span>
+              <span>ار</span>
+              <span>ِ</span>
+              <span>ي</span>
+              <span className="text-flicker"> الت</span>
+              <span className="text-glitch">ح</span>
+              <span>م</span>
+              <span>ي</span>
+              <span>ل</span>
+            </h1>
+            <p className="sub-text">برجاء الانتظار بينما نعد عالمك...</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

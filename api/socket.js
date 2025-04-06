@@ -2,20 +2,22 @@ const { Server } = require("socket.io");
 let io;
 const userSocketMap = {};
 
+// تهيئة الـ Socket.IO وربطه بالسيرفر
 const setupSocket = (server) => {
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
-      methods: ["GET", "POST", "PUT", "DELETE"], // إضافة طرق HTTP المسموحة
-      credentials: true // السماح بالإرسال مع التصريح
-    }
+      origin: ["http://localhost:5173", "http://127.0.0.1:5500"], // الأصول المسموحة
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      allowedHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
+    },
   });
 
   io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
 
     // تخزين معرف المستخدم عند الاتصال
-    const userId = socket.handshake.auth.userId; // استخدام auth بدل query
+    const userId = socket.handshake.auth.userId;
     if (userId) userSocketMap[userId] = socket.id;
 
     // إرسال قائمة المتصلين للجميع
@@ -30,6 +32,15 @@ const setupSocket = (server) => {
   });
 };
 
+// دالة لإرجاع socketId الخاص بالمستخدم
 const getReceiverSocketId = (userId) => userSocketMap[userId];
 
-module.exports = { setupSocket, getReceiverSocketId, io };
+// دالة getter للـ io للتأكد من أنه تم تهيئته
+const getIO = () => {
+  if (!io) {
+    throw new Error("Socket.io has not been initialized. Call setupSocket() first.");
+  }
+  return io;
+};
+
+module.exports = { setupSocket, getReceiverSocketId, getIO };
