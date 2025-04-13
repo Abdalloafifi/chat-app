@@ -1,0 +1,44 @@
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: #f9f5fa70;
+    border-radius: 10px 10px 0 0;
+
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.user-link-header{
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.header-icons .icon {
+    margin-left: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-header {
+    flex-wrap: wrap; /* عناصر الرأس تتنقل للأسفل */
+    gap: 10px; /* تباعد بين العناصر */
+    padding: 10px 5px; /* padding أصغر للجوال */
+}
+
+@media (min-width: 480px) {
+    .chat-header {
+        flex-wrap: nowrap;
+        padding: 10px;
+    }
+}

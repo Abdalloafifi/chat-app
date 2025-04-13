@@ -1,0 +1,265 @@
+/* General Styles */
+.all-carousels-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+  }
+  
+  .carousel-section {
+    margin: 4rem 0;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .carousel-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  /* 1. Cylinder Carousel Styles */
+  .cy-carousel-wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    perspective: 1500px;
+  }
+  
+  .cy-carousel-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+  }
+  
+  .cy-carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: transform 3s ease-in-out;
+  }
+  
+  .cy-carousel-slide {
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    margin-top: -175px;
+    margin-left: -125px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  }
+  
+  .cy-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+  }
+  
+  .cy-carousel-slide:hover img {
+    transform: scale(1.09);
+  }
+  
+  /* 2. Sphere Carousel Styles */
+  .sp-carousel-wrapper {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+  }
+  
+  .sp-carousel-container {
+    width: 500px;
+    height: 500px;
+    position: relative;
+  }
+  
+  .sp-carousel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s linear;
+  }
+  
+  .sp-carousel-slide {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    margin: -60px 0 0 -60px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+  }
+  
+  .sp-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* 3. Stacked Cards Carousel Styles */
+  .st-carousel-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .st-carousel-container {
+    width: 100%;
+    height: 400px;
+    position: relative;
+  }
+  
+  .st-carousel-slide {
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .st-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* 4. Spiral Carousel Styles */
+  .spiral-carousel-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 2000px;
+  }
+  
+  .spiral-carousel-container {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  
+  .spiral-carousel-item {
+    position: absolute;
+    width: 180px;
+    height: 240px;
+    top: 50%;
+    left: 50%;
+    margin: -120px 0 0 -90px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: transform 0.5s ease-out, opacity 0.5s ease;
+  }
+  
+  .spiral-carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .spiral-carousel-item:hover {
+    transform: scale(1.05) !important;
+    opacity: 1 !important;
+    z-index: 100 !important;
+  }
+  
+  .spiral-carousel-item:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .cy-carousel-container,
+    .sp-carousel-wrapper,
+    .st-carousel-container,
+    .spiral-carousel-container {
+      height: 400px;
+    }
+    .cy-carousel-slide {
+      width: 300px;
+      height: 350px;
+      margin-top: -140px;
+      margin-left: -100px;
+    }
+    .sp-carousel-container {
+      width: 400px;
+      height: 400px;
+    }
+    .sp-carousel-slide {
+      width: 100px;
+      height: 100px;
+      margin: -50px 0 0 -50px;
+    }
+    .st-carousel-container {
+      height: 300px;
+    }
+    .spiral-carousel-container {
+      width: 400px;
+      height: 400px;
+    }
+    .spiral-carousel-item {
+      width: 140px;
+      height: 180px;
+      margin: -90px 0 0 -70px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .all-carousels-container {
+      padding: 1rem;
+    }
+    .cy-carousel-container,
+    .sp-carousel-wrapper,
+    .st-carousel-container,
+    .spiral-carousel-container {
+      height: 300px;
+    }
+    .cy-carousel-slide {
+      width: 150px;
+      height: 210px;
+      margin-top: -105px;
+      margin-left: -75px;
+    }
+    .sp-carousel-container {
+      width: 300px;
+      height: 300px;
+    }
+    .sp-carousel-slide {
+      width: 80px;
+      height: 80px;
+      margin: -40px 0 0 -40px;
+    }
+    .st-carousel-container {
+      height: 250px;
+    }
+    .spiral-carousel-container {
+      width: 300px;
+      height: 300px;
+    }
+    .spiral-carousel-item {
+      width: 100px;
+      height: 130px;
+      margin: -65px 0 0 -50px;
+    }
+  }
+  

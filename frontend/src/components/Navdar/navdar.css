@@ -1,0 +1,180 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    /* overflow: hidden; */
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .nav-link a {
+      display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+.nav-link a:hover {
+  color: #007bff; /* لون عند التمرير */
+}
+  
+  /* Media Query للشاشات الصغيرة */
+  @media screen and (max-width: 310px) {
+    .nav-text {
+      display: none;
+    }
+  
+    /* يمكنك تعديل حجم الأيقونات أو المسافات هنا حسب الحاجة */
+    .logo {
+      font-size: 20px;
+    }
+    
+    .nav-link a {
+      gap: 0;
+      font-size: 20px; /* حجم الأيقونات */
+    }
+  }
+  
+  .settings-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .settings-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+
+  .settings-trigger:hover {
+    color: #007bff;
+  }
+  
+  .logout-dropdown {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+.logout-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #e74c3c;
+  transition: all 0.2s ease;
+}
+
+.logout-dropdown button:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+  .logout-dropdown:hover {
+    background: #f8f9fa;
+    color: #dc3545;
+  }
+  
+  @media screen and (max-width: 310px) {
+    .logout-dropdown {
+      padding: 5px;
+      font-size: 14px;
+    }
+  }
+  
+
+
+
+
+
+  /* تصميم الجوال */
+@media (max-width: 880px) {
+  .conditions-container {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .dropdown-content {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #2c3e50;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 1000;
+    min-width: 200px;
+  }
+
+  .dropdown-content.active {
+    display: flex;
+  }
+  .dropdown-content a {
+margin-bottom: 6px;
+  }
+}
+
+/* تصميم الديسكتوب */
+@media (min-width: 881px) {
+  .conditions-container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .dropdown-toggle {
+    display: none;
+  }
+
+  .dropdown-content {
+    display: flex;
+    gap: 1rem;
+  }
+}
