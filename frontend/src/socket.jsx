@@ -9,7 +9,7 @@ const user = JSON.parse(localStorage.getItem("user")) || {};
 const id = user?._id || null;
 
 // إنشاء الاتصال بالسيرفر
-export const socket = io("http://localhost:3000", {
+export const socket = io("https://chat-app-api-ivory.vercel.app/", {
   auth: {
     userId: id
   },

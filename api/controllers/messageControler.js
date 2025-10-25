@@ -17,7 +17,7 @@ if (!process.env.JWT_SECRET) {
  * @access  عام
  */
 exports.getAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({ _id: { $ne: req.user._id },isok:true }).select(
+  const users = await User.find({ isok:true }).select(
     "-password -email"
   );
   // التحقق من عدم وجود مستخدمين في المصفوفة
@@ -164,7 +164,8 @@ exports.getMessages = asyncHandler(async (req, res) => {
         { senderId: req.user._id, receiverId: id },
         { senderId: id, receiverId: req.user._id },
       ],
-    })
+  })
+
     .sort({ createdAt: 1 })
     .populate("senderId", "username avatar")
     .populate("receiverId", "username avatar");
