@@ -15,7 +15,6 @@ var messagerRouter = require('./routes/messagerrouter');
 
 var app = express();
 
-// أولاً: فعّل CORS قبل أي middleware آخر
 app.use(cors({
   origin: ['https://loke-4f8e7.web.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
