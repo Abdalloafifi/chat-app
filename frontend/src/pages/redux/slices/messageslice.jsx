@@ -6,20 +6,23 @@ const messageSlice = createSlice({
   initialState: {
     allClin: localStorage.getItem("allClin")
       ? JSON.parse(localStorage.getItem("allClin"))
-      : [null],
+      : [],
     getFriends: localStorage.getItem("getFriends")
       ? JSON.parse(localStorage.getItem("getFriends"))
-      : [null],
-    getUsers: [null],
+      : [],
+    getUsers: [],
     getConfirmFriends: [],
     commchat: localStorage.getItem("commchat")
       ? JSON.parse(localStorage.getItem("commchat"))
-      : [null],
+      : [],
     getMessages: [],
     likeMessage: null,
-
+    onlineUsers: [], // قائمة المستخدمين المتصلين
   },
   reducers: {
+    setOnlineUsers(state, action) {
+      state.onlineUsers = action.payload;
+    },
     getCline(state, action) {
       state.allClin = action.payload;
     },
@@ -59,15 +62,62 @@ const messageSlice = createSlice({
     },
 
     addNewMessage(state, action) {
-      state.getMessages.push(action.payload);
+      const newMessage = action.payload;
+
+      // 1. Add to messages list if not exists
+      const messageExists = state.getMessages.some(msg => msg._id === newMessage._id);
+      if (!messageExists) {
+        state.getMessages.push(newMessage);
+      }
+
+      // 2. Update Friend List (Sidebar) with Last Message
+      // Ensure getFriends is an array and filter out nulls just in case
+      if (!Array.isArray(state.getFriends)) {
+        state.getFriends = [];
+      }
+
+      const friendIndex = state.getFriends.findIndex(
+        f => f && (f._id === newMessage.senderId || f._id === newMessage.receiverId)
+      );
+
+      if (friendIndex !== -1) {
+        const friend = state.getFriends[friendIndex];
+
+        // Update last message info
+        friend.lastMessage = {
+          text: newMessage.text || (newMessage.file ? '📎 ملف' : 'رسالة صوتية'),
+          createdAt: newMessage.createdAt,
+          senderId: newMessage.senderId
+        };
+
+        // Move to top
+        state.getFriends.splice(friendIndex, 1);
+        state.getFriends.unshift(friend);
+      }
     },
 
     deleteMessage(state, action) {
       state.getMessages = state.getMessages.filter(
-        msg => msg._id !== action.payload
+        msg => msg._id !== action.payload.messageId
       );
-
     },
+
+    updateMessageLike(state, action) {
+      const { messageId, likes } = action.payload;
+      const message = state.getMessages.find(msg => msg._id === messageId);
+      if (message) {
+        message.like = likes;
+      }
+    },
+
+    updateMessageText(state, action) {
+      const updatedMessage = action.payload;
+      const index = state.getMessages.findIndex(msg => msg._id === updatedMessage._id);
+      if (index !== -1) {
+        state.getMessages[index] = updatedMessage;
+      }
+    },
+
     likeMessage(state, action) {
       state.likeMessage = action.payload;
     },

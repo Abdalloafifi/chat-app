@@ -28,6 +28,28 @@ const messageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     }],
+    // Call record fields
+    isCallRecord: {
+      type: Boolean,
+      default: false,
+    },
+    callType: {
+      type: String,
+      enum: ['audio', 'video', null],
+      default: null,
+    },
+    callDuration: {
+      type: Number, // in seconds
+      default: 0,
+    },
+    callStatus: {
+      type: String,
+      enum: ['completed', 'missed', 'rejected', 'cancelled', null],
+      default: null,
+    },
+    editedAt: {
+      type: Date,
+    },
   },
   { timestamps: true }
 );

@@ -1,44 +1,303 @@
+/* Header.css - محسّن */
+.avatar-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.online-status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    background-color: #aeaeae;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    animation: pulse-online 2s infinite;
+}
+
+@keyframes pulse-online {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+.online-text {
+    font-size: 11px;
+    color: #25d366;
+    margin-top: 3px;
+    display: block;
+    font-weight: 500;
+    text-align: center;
+    background: rgba(37, 211, 102, 0.1);
+    padding: 2px 6px;
+    border-radius: 10px;
+    animation: fadeInText 0.5s ease;
+}
+
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .chat-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background: #f9f5fa70;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #008069 0%, #00a884 100%);
+    /* أخضر واتساب متدرج */
     border-radius: 10px 10px 0 0;
-
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 64px;
+    box-shadow: 0 4px 12px rgba(0, 128, 105, 0.2);
 }
 
 .user-info {
     display: flex;
     align-items: center;
-}
-.user-link-header{
-    display: flex;
-    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    /* لمنع تجاوز العرض */
 }
 
-.user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+.user-link-header {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 12px;
+    transition: opacity 0.2s ease;
+    flex: 1;
+    min-width: 0;
+}
+
+.user-link-header:hover {
+    opacity: 0.9;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.user-name-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+    /* أبيض فاتح قليلاً */
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    /* ظل أقوى قليلاً للوضوح */
+}
+
+.user-status {
+    font-size: 12px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
 }
 
 .header-icons .icon {
-    margin-left: 15px;
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
+    color: #ffffff;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
 }
 
-.chat-header {
-    flex-wrap: wrap; /* عناصر الرأس تتنقل للأسفل */
-    gap: 10px; /* تباعد بين العناصر */
-    padding: 10px 5px; /* padding أصغر للجوال */
+.header-icons .icon:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    /* خلفية بيضاء شفافة */
+    color: #ffffff;
+    transform: scale(1.1);
 }
 
-@media (min-width: 480px) {
+.header-icons .icon:active {
+    transform: scale(0.95);
+}
+
+/* أيقونات المكالمات */
+.call-icon {
+    position: relative;
+}
+
+.call-icon::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background-color: #25d366;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    display: none;
+}
+
+.call-icon.active::after {
+    display: block;
+}
+
+/* استجابة للجوال */
+@media (max-width: 768px) {
     .chat-header {
-        flex-wrap: nowrap;
-        padding: 10px;
+        padding: 10px 12px;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-height: 56px;
+    }
+
+    .avatar-wrapper {
+        width: 40px;
+        height: 40px;
+    }
+
+    .user-name-header {
+        font-size: 15px;
+        max-width: 150px;
+    }
+
+    .header-icons {
+        gap: 12px;
+    }
+
+    .header-icons .icon {
+        font-size: 20px;
+        min-width: 36px;
+        min-height: 36px;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-header {
+        padding: 8px 10px;
+        border-radius: 8px 8px 0 0;
+    }
+
+    .avatar-wrapper {
+        width: 36px;
+        height: 36px;
+    }
+
+    .online-status-dot {
+        width: 10px;
+        height: 10px;
+        border-width: 1.5px;
+    }
+
+    .user-name-header {
+        font-size: 14px;
+        max-width: 120px;
+    }
+
+    .header-icons .icon {
+        font-size: 18px;
+        min-width: 32px;
+        min-height: 32px;
+        padding: 5px;
+    }
+
+    .online-text {
+        font-size: 10px;
+        padding: 1px 4px;
+    }
+}
+
+/* تحسينات للنمط الداكن */
+@media (prefers-color-scheme: dark) {
+    .chat-header {
+        background: linear-gradient(135deg, #1e2428 0%, #2a2f32 100%);
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .user-avatar {
+        border-color: #2a2f32;
+    }
+
+    .user-name-header {
+        color: #e9edef;
+    }
+
+    .user-status {
+        color: #8696a0;
+    }
+
+    .header-icons .icon {
+        color: #aebac1;
+    }
+
+    .header-icons .icon:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #00a884;
+    }
+
+    .online-status-dot {
+        border-color: #2a2f32;
+    }
+
+    .online-text {
+        background: rgba(37, 211, 102, 0.15);
+        color: #25d366;
     }
 }

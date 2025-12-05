@@ -16,7 +16,7 @@ var messagerRouter = require('./routes/messagerrouter');
 var app = express();
 
 app.use(cors({
-  origin: ['https://loke-4f8e7.web.app'],
+  origin: ['http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,

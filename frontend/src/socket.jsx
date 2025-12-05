@@ -9,7 +9,7 @@ const user = JSON.parse(localStorage.getItem("user")) || {};
 const id = user?._id || null;
 
 // إنشاء الاتصال بالسيرفر
-export const socket = io("https://chat-app-api-ivory.vercel.app/", {
+export const socket = io("https://0l9l56xf-8080.uks1.devtunnels.ms/", {
   auth: {
     userId: id
   },
@@ -61,10 +61,34 @@ export const useNewMessage = () => {
       dispatch(massActions.addNewMessage(newMessage));
     };
 
+    const handleLikeMessage = ({ messageId, likes }) => {
+      dispatch(massActions.updateMessageLike({ messageId, likes }));
+    };
+
+    const handleDeleteMessage = ({ messageId }) => {
+      dispatch(massActions.deleteMessage({ messageId }));
+    };
+
+    const handleEditMessage = (updatedMessage) => {
+      dispatch(massActions.updateMessageText(updatedMessage));
+    };
+
+    const handleOnlineUsers = (users) => {
+      dispatch(massActions.setOnlineUsers(users));
+    };
+
     socket.on("newMessage", handleNewMessage);
+    socket.on("likeMessage", handleLikeMessage);
+    socket.on("deleteMessage", handleDeleteMessage);
+    socket.on("editMessage", handleEditMessage);
+    socket.on("onlineUsers", handleOnlineUsers);
 
     return () => {
       socket.off("newMessage", handleNewMessage);
+      socket.off("likeMessage", handleLikeMessage);
+      socket.off("deleteMessage", handleDeleteMessage);
+      socket.off("editMessage", handleEditMessage);
+      socket.off("onlineUsers", handleOnlineUsers);
     };
   }, [dispatch]);
 };

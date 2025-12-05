@@ -46,27 +46,34 @@ const AddFriend = () => {
     <div className="clines-chat-container">
       <div className="clines-chat-users">
         {sortedUsers.length > 0 ? (
-          sortedUsers.map(u => (
-            <div key={u._id} className="user-link">
-              <div className="user-item">
-                {u.avatar && (
-                  <img 
-                    src={u.avatar} 
-                    alt={`${u.username}'s avatar`} 
-                    className="user-avatar" 
+          sortedUsers.map(u => {
+            // صورة افتراضية إذا لم تكن موجودة
+            const avatarUrl = u.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.username || 'User') + '&background=008069&color=fff&size=128';
+
+            return (
+              <div key={u._id} className="user-link">
+                <div className="user-item">
+                  <img
+                    src={avatarUrl}
+                    alt={`${u.username}'s avatar`}
+                    className="user-avatar"
+                    onError={(e) => {
+                      // إذا فشل تحميل الصورة، استخدم الصورة الافتراضية
+                      e.target.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.username || 'User') + '&background=008069&color=fff&size=128';
+                    }}
                   />
-                )}
-                {onlineUsers.includes(u._id) && <span className="online-dot">🟢</span>}
-                <span className="user-name">{u.username}</span>
-                <button 
-                  className="btn-edit-content" 
-                  onClick={() => handleAddFriend(u._id)}
-                >
-                  إضافة صديق
-                </button>
+                  {onlineUsers.includes(u._id) && <span className="online-dot">🟢</span>}
+                  <span className="user-name">{u.username}</span>
+                  <button
+                    className="btn-edit-content"
+                    onClick={() => handleAddFriend(u._id)}
+                  >
+                    إضافة صديق
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <p className=' profile-description text-muted mb-0'>Do you want to gather the people of the earth as your friends?🙄🤔</p>
         )}

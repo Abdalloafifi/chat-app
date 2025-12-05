@@ -6,34 +6,25 @@ import { Link } from 'react-router-dom';
 import { socket } from '../../socket';
 
 const ClinesChat = () => {
-  const [onlineUsers, setOnlineUsers] = React.useState([]); // حالة لتخزين الأونلاين يوزرز
   const dispatch = useDispatch();
   const userList = useSelector((state) => state.message.allClin);
   const { user } = useSelector((state) => state.auth);
+  const onlineUsers = useSelector((state) => state.message.onlineUsers); // استخدام Redux state
 
   useEffect(() => {
     dispatch(getAllUsers());
   }, [dispatch]);
 
-  useEffect(() => {
-    // استماع لحدث الأونلاين يوزرز من السيرفر 
-    socket.on('onlineUsers', (users) => {
-      setOnlineUsers(users); // تحديث الحالة عند استلام بيانات الأونلاين يوزرز
-    });
-
-    return () => {
-      socket.off('onlineUsers'); // تنظيف الـ event عند فك الاتصال
-    };
-  }, []);
+  // تم نقل استماع onlineUsers إلى socket.jsx ليكون مركزياً
 
   // التأكد أن userList ليست null وأنها مصفوفة ثم ترتيبها
   const sortedUsers = userList && userList.length > 0
     ? [...userList].sort(
-        (a, b) =>
-          new Date(b.lastMessageTimestamp || 0) - new Date(a.lastMessageTimestamp || 0)
-      )
+      (a, b) =>
+        new Date(b.lastMessageTimestamp || 0) - new Date(a.lastMessageTimestamp || 0)
+    )
     : [];
-  
+
   // تصفية العناصر التي ليست null لتجنب الأخطاء أثناء التكرار
   const filteredUsers = sortedUsers.filter(user => user);
 

@@ -1,0 +1,248 @@
+/* EditMessageModal.css - محسّن */
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.edit-modal-content {
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.edit-modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #008069 0%, #00a884 100%);
+  border-radius: 16px 16px 0 0;
+}
+
+.edit-modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #111b21;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.edit-modal-content textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  resize: vertical;
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: #fafafa;
+}
+
+.edit-modal-content textarea:focus {
+  outline: none;
+  border-color: #008069;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 128, 105, 0.1);
+}
+
+.edit-modal-content textarea::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+.edit-modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.edit-modal-actions button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.edit-modal-actions button:active {
+  transform: scale(0.98);
+}
+
+.cancel-btn {
+  background-color: #f0f2f5;
+  color: #54656f;
+  border: 1px solid #e0e0e0;
+}
+
+.cancel-btn:hover {
+  background-color: #e4e6e8;
+  color: #333;
+  border-color: #d0d0d0;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #008069 0%, #00a884 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 128, 105, 0.3);
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #006d59 0%, #008069 100%);
+  box-shadow: 0 4px 12px rgba(0, 128, 105, 0.4);
+}
+
+.save-btn:disabled {
+  background: #cccccc;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.save-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* استجابة للجوال */
+@media (max-width: 768px) {
+  .edit-modal-content {
+    padding: 20px;
+    margin: 15px;
+    width: calc(100% - 30px);
+  }
+  
+  .edit-modal-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  
+  .edit-modal-content textarea {
+    min-height: 100px;
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .edit-modal-actions button {
+    padding: 10px 16px;
+    font-size: 13px;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-modal-content {
+    padding: 18px;
+    border-radius: 12px;
+  }
+  
+  .edit-modal-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .edit-modal-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .edit-modal-actions button {
+    width: 100%;
+  }
+}
+
+/* تحسينات للنمط الداكن */
+@media (prefers-color-scheme: dark) {
+  .edit-modal-content {
+    background-color: #2a2f32;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .edit-modal-content h3 {
+    color: #e9edef;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .edit-modal-content textarea {
+    background-color: #1e2428;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e9edef;
+  }
+  
+  .edit-modal-content textarea:focus {
+    border-color: #00a884;
+    background-color: #111b21;
+    box-shadow: 0 0 0 3px rgba(0, 168, 132, 0.2);
+  }
+  
+  .edit-modal-content textarea::placeholder {
+    color: #8696a0;
+  }
+  
+  .cancel-btn {
+    background-color: #3b4043;
+    color: #e9edef;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .cancel-btn:hover {
+    background-color: #4a4f52;
+    color: #ffffff;
+  }
+}

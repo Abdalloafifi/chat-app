@@ -1,3 +1,4 @@
+import React from 'react';
 import ChatMessage from "../../components/Chat-message";
 import ClinesChat from "../chatisok/Clines-Chat";
 import "./ChatStayle.css"

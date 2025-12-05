@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { verifyToken, verifyTokenAndAuthorization } = require('../middlewares/verifytoken');
 
-const { getAllUsers,getAllFriends , getMessages, sendMessage, likeMessage,ConfirmOrder,addFriends,deleteMessage,getUsers,getConfirmFriends } = require('../controllers/messageControler');
+const { getAllUsers, getAllFriends, getMessages, sendMessage, likeMessage, ConfirmOrder, addFriends, deleteForEveryone, getUsers, getConfirmFriends, editMessage, createCallRecord } = require('../controllers/messageControler');
 const upload = require('../middlewares/uplod');
 
 
@@ -15,7 +15,9 @@ router.post('/confirmOrder', verifyToken, ConfirmOrder);
 router.get('/messages/:id', verifyToken, getMessages);
 router.post('/sendmessage/:id', verifyToken, upload.single('file'), sendMessage);
 router.put('/like/:id', verifyToken, likeMessage);
-router.delete('/delete/:id', verifyToken, deleteMessage);
+router.put('/edit/:id', verifyToken, editMessage);
+router.delete('/delete/:id', verifyToken, deleteForEveryone);
+router.post('/call-record', verifyToken, createCallRecord);
 
 
 module.exports = router;

@@ -1,144 +1,601 @@
-.message-composer {
-  /* 
-    bottom: 0;
-    left: 0;
-    right: 0; */
-    background: #f0f0f0;
-    padding: 10px 16px;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
-    border-radius: 0 0 10px 10px;
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    border-radius: 21px;
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-  }
-  
-  .message-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 9px 12px;
-    font-size: 15px;
-    min-height: 20px;
-    max-height: 100px;
-    overflow-y: auto;
-    resize: none;
-    background: transparent;
-    scrollbar-width: auto; /* Firefox */
+/* seend.css - ملف CSS محسّن ومتكامل */
 
-  }
-  .message-input::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
-}
-  
-  .icon-container {
-    display: flex;
-    gap: 8px;
-    padding: 0 5px;
-    
-  }
-  
-  .icon-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #666;
-    font-size: 24px;
-    padding: 5px;
-    transition: opacity 0.2s;
-  }
-  
-  .icon-btn:hover {
-    opacity: 0.7;
-  }
-  
-  .send-btn {
-    color: #0084ff;
-    /* transform: rotate(90deg); */
-  }
-  
-  .recording-bar {
-    display: flex;
-    align-items: center;
-    background: #ffebee;
-    padding: 10px 15px;
-    border-radius: 21px;
-    margin-bottom: 10px;
-  }
-  
-  .recording-indicator {
-    width: 12px;
-    height: 12px;
-    background: #f44336;
-    border-radius: 50%;
-    margin-right: 10px;
-    animation: pulse 1s infinite;
-  }
-  .recording-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #ffebee;
-    padding: 10px 15px;
-    border-radius: 21px;
-    margin-bottom: 10px;
-    gap: 10px;
-    width: 100%;
-  }
-  
-  /* إخفاء العناصر أثناء التسجيل */
-  .message-input[style*="none"], 
-  .right-icons[style*="none"], 
-  .icon-btn[style*="none"] {
-    display: none !important;
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(0.95); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(0.95); }
-  }
-  
-  /* ترتيب الأيقونات */
-  .left-icons {
-    order: 1;
-  }
-  
-  .message-input {
-    order: 2;
-  }
-  
-  .right-icons {
-    order: 3;
-  }
-  .message-composer {
-    position: sticky;
-    bottom: 0;
-    background: #f0f0f0;
-    padding: 10px;
-}
-
-.input-container {
-    flex-wrap: wrap; /* عناصر الإدخال تتنقل للأسفل */
-}
+/* ===== Container الرئيسي ===== */
 .message-composer {
   position: sticky;
   bottom: 0;
-  background: #f0f0f0;
-  padding: 10px;
-  border-top: 1px solid #ddd; /* فصل مرئي */
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+  padding: 12px 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
+
+/* ===== حاوية الإدخال الرئيسية ===== */
+.input-container {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 6px 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  gap: 8px;
+}
+
+.input-container:focus-within {
+  border-color: #008069;
+  box-shadow: 0 1px 6px rgba(0, 128, 105, 0.15);
+  transform: translateY(-1px);
+}
+
+/* ===== حقل إدخال الرسالة ===== */
+.message-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 12px;
+  font-size: 15px;
+  min-height: 22px;
+  max-height: 120px;
+  overflow-y: auto;
+  resize: none;
+  background: transparent;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.4;
+  color: #333;
+  scrollbar-width: thin;
+  scrollbar-color: #008069 #f5f5f5;
+}
+
+.message-input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+.message-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message-input::-webkit-scrollbar {
+  width: 6px;
+}
+
+.message-input::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 3px;
+}
+
+.message-input::-webkit-scrollbar-thumb {
+  background: #008069;
+  border-radius: 3px;
+}
+
+.message-input::-webkit-scrollbar-thumb:hover {
+  background: #006d59;
+}
+
+/* ===== حاوية الأيقونات ===== */
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.icon-container.left-icons {
+  order: 1;
+}
+
+.icon-container.right-icons {
+  order: 3;
+}
+
+/* ===== أزرار الأيقونات ===== */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 22px;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  position: relative;
+}
+
+.icon-btn:hover {
+  background: rgba(0, 128, 105, 0.1);
+  color: #008069;
+  transform: scale(1.05);
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+}
+
+.icon-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.icon-btn.disabled:hover {
+  background: none;
+  color: #666;
+  transform: none;
+}
+
+/* زر الإرسال الخاص */
+.send-btn {
+  background: linear-gradient(135deg, #008069 0%, #00a884 100%);
+  color: white !important;
+  box-shadow: 0 2px 5px rgba(0, 128, 105, 0.3);
+}
+
+.send-btn:hover {
+  background: linear-gradient(135deg, #006d59 0%, #008069 100%);
+  box-shadow: 0 3px 8px rgba(0, 128, 105, 0.4);
+}
+
+.send-btn:disabled {
+  background: #cccccc;
+  box-shadow: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* زر الإيموجي */
+.emoji-btn {
+  color: #ff9800;
+}
+
+.emoji-btn:hover {
+  color: #f57c00;
+  background: rgba(255, 152, 0, 0.1);
+}
+
+/* ===== شريط التسجيل ===== */
+.recording-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+  padding: 12px 16px;
+  border-radius: 24px;
+  margin-bottom: 10px;
+  animation: slideIn 0.3s ease-out;
+  border: 1px solid #ff8a80;
+  box-shadow: 0 2px 8px rgba(244, 67, 54, 0.15);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.pulse {
+  width: 14px;
+  height: 14px;
+  background: #f44336;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  position: relative;
+}
+
+.pulse::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: rgba(244, 67, 54, 0.3);
+  border-radius: 50%;
+  animation: pulse-ring 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.recording-text {
+  color: #d32f2f;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.recording-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.stop-btn {
+  background: #f44336;
+  color: white;
+  font-size: 20px;
+}
+
+.stop-btn:hover {
+  background: #d32f2f;
+  box-shadow: 0 2px 5px rgba(211, 47, 47, 0.3);
+}
+
+.cancel-btn {
+  background: #757575;
+  color: white;
+  font-size: 20px;
+}
+
+.cancel-btn:hover {
+  background: #616161;
+}
+
+/* ===== معاينة الملفات ===== */
+.file-preview,
+.audio-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  padding: 10px 14px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease;
+  border: 1px solid #90caf9;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #1976d2;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #546e7a;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.remove-btn {
+  background: rgba(244, 67, 54, 0.1);
+  border: none;
+  color: #f44336;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 50%;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.remove-btn:hover {
+  background: rgba(244, 67, 54, 0.2);
+  transform: rotate(90deg);
+}
+
+/* ===== معاينة الصوت ===== */
+.audio-preview audio {
+  flex: 1;
+  height: 36px;
+  border-radius: 18px;
+}
+
+.audio-preview audio::-webkit-media-controls-panel {
+  background: #f5f5f5;
+  border-radius: 18px;
+}
+
+/* ===== منتقي الإيموجي ===== */
+.emoji-picker-container {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  z-index: 1000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  animation: popUp 0.2s ease-out;
+}
+
+@keyframes popUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ===== تلميح الإدخال ===== */
+.input-hint {
+  font-size: 11px;
+  color: #666;
+  text-align: center;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.input-hint:hover {
+  opacity: 1;
+}
+
+/* ===== استجابة للجوال ===== */
+@media (max-width: 768px) {
+  .message-composer {
+    padding: 10px 12px;
+  }
+
+  .input-container {
+    padding: 5px 10px;
+  }
+
+  .icon-btn {
+    min-width: 36px;
+    min-height: 36px;
+    font-size: 20px;
+    padding: 6px;
+  }
+
+  .message-input {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .emoji-picker-container {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    bottom: 70px;
+  }
+
+  .file-name {
+    max-width: 60%;
+  }
+}
+
 @media (max-width: 480px) {
-    .message-input {
-        font-size: 14px; /* خط أصغر للجوال */
-    }
-    
-    .icon-btn {
-        font-size: 20px; /* أيقونات أصغر */
-    }
+  .message-composer {
+    padding: 8px 10px;
+  }
+
+  .icon-btn {
+    min-width: 32px;
+    min-height: 32px;
+    font-size: 18px;
+    padding: 5px;
+  }
+
+  .recording-bar {
+    padding: 10px 12px;
+  }
+
+  .recording-text {
+    font-size: 13px;
+  }
+
+  .file-preview,
+  .audio-preview {
+    padding: 8px 12px;
+  }
+
+  .input-hint {
+    font-size: 10px;
+  }
+}
+
+/* ===== تأثيرات خاصة ===== */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: #666;
+  animation: fadeInUp 0.3s ease;
+}
+
+.typing-indicator .dot {
+  width: 6px;
+  height: 6px;
+  background: #008069;
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== تحسينات الوصول ===== */
+@media (prefers-reduced-motion: reduce) {
+
+  .icon-btn,
+  .recording-bar,
+  .file-preview,
+  .audio-preview,
+  .emoji-picker-container,
+  .typing-indicator {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* ===== تحسينات للنمط الداكن ===== */
+@media (prefers-color-scheme: dark) {
+  .message-composer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .input-container {
+    background: #2d2d2d;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .message-input {
+    color: #ffffff;
+    background: transparent;
+  }
+
+  .message-input::placeholder {
+    color: #999;
+  }
+
+  .message-input::-webkit-scrollbar-track {
+    background: #3d3d3d;
+  }
+
+  .icon-btn {
+    color: #cccccc;
+  }
+
+  .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .recording-bar {
+    background: linear-gradient(135deg, #3d1c1c 0%, #4d2a2a 100%);
+    border-color: #ff6b6b;
+  }
+
+  .file-preview,
+  .audio-preview {
+    background: linear-gradient(135deg, #1c2d3d 0%, #2a3d4d 100%);
+    border-color: #4dabf7;
+  }
+
+  .file-name {
+    color: #74c0fc;
+  }
+
+  .file-size {
+    background: rgba(255, 255, 255, 0.1);
+    color: #adb5bd;
+  }
+
+  .input-hint {
+    background: rgba(255, 255, 255, 0.1);
+    color: #999;
+  }
 }
